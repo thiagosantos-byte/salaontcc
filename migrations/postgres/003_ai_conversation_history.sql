@@ -11,4 +11,7 @@ CREATE TABLE IF NOT EXISTS ai_conversations (
   created_at TEXT NOT NULL DEFAULT (CURRENT_TIMESTAMP::TEXT)
 );
 CREATE INDEX IF NOT EXISTS idx_ai_conversations_owner ON ai_conversations(salon_id,user_id,id);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0dffae306b12bca2e34d122c2714f536b1b8351e

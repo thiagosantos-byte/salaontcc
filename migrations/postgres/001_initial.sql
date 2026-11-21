@@ -161,4 +161,7 @@ CREATE INDEX idx_transactions_period ON financial_transactions(salon_id,status,t
 CREATE INDEX idx_transactions_due ON financial_transactions(salon_id,status,due_date);
 CREATE INDEX idx_appointments_time ON appointments(salon_id,starts_at,status);
 CREATE INDEX idx_clients_name ON clients(salon_id,name);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0dffae306b12bca2e34d122c2714f536b1b8351e

@@ -8,4 +8,7 @@ CREATE TABLE professional_services (
   UNIQUE(salon_id,professional_id,service_id)
 );
 CREATE INDEX idx_professional_services ON professional_services(salon_id,professional_id,active);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0dffae306b12bca2e34d122c2714f536b1b8351e
