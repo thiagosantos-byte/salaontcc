@@ -17,15 +17,30 @@ if (usingPostgres) {
   const { Pool, types } = require("pg");
   types.setTypeParser(20, (value) => Number(value));
   types.setTypeParser(1700, (value) => Number(value));
+  let connectionString = process.env.DATABASE_URL;
+  let ssl;
+  if (process.env.PGSSL === "disable") {
+    ssl = false;
+  } else if (process.env.PGSSL_CA_CERT) {
+    // Remove URL SSL parameters so pg-connection-string does not override the supplied CA.
+    const databaseUrl = new URL(connectionString);
+    databaseUrl.searchParams.delete("sslmode");
+    databaseUrl.searchParams.delete("sslrootcert");
+    connectionString = databaseUrl.toString();
+    ssl = {
+      ca: process.env.PGSSL_CA_CERT.replace(/\\n/g, "\n"),
+      rejectUnauthorized: true,
+    };
+  } else {
+    ssl = { rejectUnauthorized: process.env.PGSSL_REJECT_UNAUTHORIZED !== "false" };
+  }
   pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
+    connectionString,
     allowExitOnIdle: true,
     max: Number(process.env.DB_POOL_MAX || 5),
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 10000,
-    ssl: process.env.PGSSL === "disable"
-      ? false
-      : { rejectUnauthorized: process.env.PGSSL_REJECT_UNAUTHORIZED !== "false" },
+    ssl,
   });
   pool.on("error", (error) => console.error("Erro inesperado no pool PostgreSQL:", error));
 } else {
