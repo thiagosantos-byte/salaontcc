@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f1eb">
+  <link rel="icon" type="image/jpeg" href="/assets/salaon-symbol.jpg">
+  <meta name="description" content="SalaON organiza agenda, clientes e financeiro do seu salão.">
+  <title>SalaON — gestão com clareza</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      var preference = "system";
+      try {
+        var saved = localStorage.getItem("salaon-theme");
+        if (saved === "light" || saved === "dark" || saved === "system") preference = saved;
+      } catch (_) {}
+      var resolved = preference === "system"
+        ? (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+        : preference;
+      document.documentElement.dataset.theme = resolved;
+      document.documentElement.dataset.themePreference = preference;
+      document.documentElement.style.colorScheme = resolved;
+    })();
+  </script>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <div id="toast-region" class="toast-region" aria-live="polite"></div>
+  <main id="app" class="app-root">
+    <section class="login-shell glass-card">
+      <div class="login-art">
+        <span class="brand-symbol-frame"><img src="/assets/salaon-symbol.jpg" alt="Logo SalaON"></span>
+        <p class="eyebrow">Cuidado com o negócio</p>
+        <h1>Seu salão em sintonia.</h1>
+        <p class="login-copy">Uma visão clara da rotina, da equipe e do dinheiro que faz seu negócio crescer.</p>
+        <div class="login-orbit orbit-a"></div><div class="login-orbit orbit-b"></div>
+        <div class="login-glass-note"><span class="live-dot"></span> Agenda, caixa e equipe em um só lugar</div>
+      </div>
+      <div class="login-panel">
+        <div class="mobile-brand"><span class="brand-symbol-frame small"><img src="/assets/salaon-symbol.jpg" alt=""></span><span class="brand-wordmark-frame mobile-wordmark"><img src="/assets/salaon-wordmark.jpg" alt="SalaON"></span></div>
+        <p class="eyebrow">Bem-vinda ao SalaON</p>
+        <h2>Entrar na sua conta</h2>
+        <p class="muted">Acesse o espaço seguro do seu salão.</p>
+        <form id="login-form" class="form-stack">
+          <label>E-mail<input name="email" type="email" autocomplete="username" placeholder="voce@seusalao.com" required></label>
+          <label>Senha<input name="password" type="password" autocomplete="current-password" placeholder="Sua senha" required></label>
+          <button class="button primary full" type="submit">Entrar <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="login-help">Cada pessoa entra com seu próprio acesso. A dona cadastra as funcionárias em Configurações → Acessos e papéis.</p>
+        <p id="login-error" class="error-text" role="alert"></p>
+      </div>
+    </section>
+  </main>
+  <dialog id="modal" class="modal glass-card" aria-labelledby="modal-title">
+    <div id="modal-content"></div>
+  </dialog>
+</body>
+</html>
