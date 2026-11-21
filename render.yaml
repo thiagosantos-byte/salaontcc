@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: salaon
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: SALAON_DEMO_EMAIL
+        value: dona@salaon.local
+      - key: SALAON_DEMO_PASSWORD
+        sync: false
